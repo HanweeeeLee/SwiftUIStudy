@@ -75,6 +75,27 @@ struct StandardTitle: ViewModifier {
     }
 }
 
+/*
+ custom container view
+ 자주쓰이는 VStack이지만 서로 다른 뷰들이 담겨야한다.
+ */
+struct MyVStack<Content: View>: View {
+    let content: () -> Content
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            content()
+        }
+        .font(.largeTitle)
+    }
+}
+/*
+ custom container view end
+*/
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
