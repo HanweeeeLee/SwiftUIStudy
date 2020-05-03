@@ -16,15 +16,30 @@ struct ContentView: View {
 //                .foregroundColor(.red)
             VStack {
                 Text("Text1")
+                    .modifier(StandardTitle())
                 Text("Text2")
+                    .modifier(StandardTitle())
                 MyHStackView()
             }
-            HStack {
-                Text("car Image")
-                Image(systemName: "car.fill")
+            MyCarStackView().font(.largeTitle)
+            VStack {
+                Button(action: buttonPressed) {
+                    Text("Click Me")
+                    Image(systemName: "square.and.arrow.down")
+                }
+                .onDisappear {
+                    print("버튼이 사라진다.")
+                }
+                .onAppear {
+                    print("버튼이 나타났다.")
+                }
             }
             
         }
+    }
+    
+    func buttonPressed() {
+        //동작할 코드가 온다.
     }
 }
 
@@ -33,7 +48,30 @@ struct MyHStackView: View {
         HStack {
             Text("Text 3")
             Text("Text 4")
+                .padding()
+                .border(Color.black)
         }
+    }
+}
+
+struct MyCarStackView: View {
+    var body: some View {
+        HStack {
+            Text("car Image")
+            Image(systemName: "car.fill")
+            .resizable()
+                .aspectRatio(contentMode: .fit)
+        }
+    }
+}
+
+struct StandardTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .background(Color.white)
+            .border(Color.gray, width: 0.2)
+            .shadow(color: .black, radius: 5, x: 0, y: 5)
     }
 }
 
