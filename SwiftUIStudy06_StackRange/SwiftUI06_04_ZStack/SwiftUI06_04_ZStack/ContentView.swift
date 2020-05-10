@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack (alignment: .myAlignment){
+        ZStack (alignment: .myAlignment){//ZStack : 기준점이 같은곳인듯
             Rectangle()//autolayout이랑 비슷하게 가는듯
                 .foregroundColor(.red)
                 .alignmentGuide(HorizontalAlignment.myAlignment)

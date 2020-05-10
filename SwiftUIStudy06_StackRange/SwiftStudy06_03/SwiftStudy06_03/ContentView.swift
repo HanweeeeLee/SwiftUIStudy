@@ -31,7 +31,7 @@ struct ContentView: View {
             HStack(alignment: .crossAlignment, spacing: 20) {
                 Circle()
                     .foregroundColor(.purple)
-                    .alignmentGuide(.crossAlignment, computeValue: {d in d[VerticalAlignment.center]})
+                    .alignmentGuide(.crossAlignment, computeValue: <#(ViewDimensions) -> CGFloat#>)
                     .frame(width: 100, height: 100)
                 
                 VStack(alignment: .center) {
@@ -59,6 +59,15 @@ struct ContentView: View {
 }
 
 extension VerticalAlignment {
+    private enum CrossAlignmnet : AlignmentID {
+        static func defaultValue(in d: ViewDimensions) -> CGFloat {
+            return d[.bottom]
+        }
+    }
+    static let crossAlignment = VerticalAlignment(CrossAlignmnet.self)
+}
+
+extension VerticalAlignment {
     private enum OneThird : AlignmentID {
         static func defaultValue(in d: ViewDimensions) -> CGFloat {
             return d.height / 3
@@ -67,14 +76,6 @@ extension VerticalAlignment {
     static let oneThird = VerticalAlignment(OneThird.self)
 }
 
-extension VerticalAlignment {
-    private enum CrossAlignmnet : AlignmentID {
-        static func defaultValue(in d: ViewDimensions) -> CGFloat {
-            return d[.bottom]
-        }
-    }
-    static let crossAlignment = VerticalAlignment(CrossAlignmnet.self)
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
